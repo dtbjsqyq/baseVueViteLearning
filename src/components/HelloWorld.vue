@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
 import viteLogo from '../assets/vite.svg'
 import heroImg from '../assets/hero.png'
 import vueLogo from '../assets/vue.svg'
 
 const count = ref(0)
+const status = ref('normal')  // normal / warning / error
 const countDecrease = ref(0)
 
 const increment = () => {
@@ -29,6 +30,24 @@ const handleClick = () => {
 
 const handleChangeTitle = () => {
   emit('change-title', '新标题')
+}
+
+
+const doubleCount = computed(() => {
+  console.log('加工厂开始开工...')
+  return count.value * 2
+})
+
+
+watch(status, (newValue, oldValue) => {
+  console.log(`status发生变化,${newValue} 变成 ${oldValue}`)
+  if (newValue === 'error') {
+    alert('status变成了error')
+  }
+})
+
+const triggerError = () => {
+  status.value = 'error'
 }
 
 </script>
@@ -60,9 +79,27 @@ const handleChangeTitle = () => {
     <h1>props: {{ props.msg }}</h1>
     <h1>props: {{ props.user }}</h1>
 
+    <h6>加工值: {{ doubleCount }}</h6>
+    <h6>加工值: {{ doubleCount }}</h6>
+    <h6>加工值: {{ doubleCount }}</h6>
+    <h6>加工值: {{ doubleCount }}</h6>
+
+    <p>设备状态: {{ status }}</p>
+    <button type="button" class="counter" @click="triggerError">
+      触发错误
+    </button>
+
+
   </section>
 
   <div class="ticks"></div>
+
+
+
+
+
+
+
 
   <section id="next-steps">
     <div id="docs">

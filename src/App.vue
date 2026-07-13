@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
+
 import HelloWorld from './components/HelloWorld.vue'
-import { ref } from 'vue'
 const data = ref(0)
 const parentData = ref("a")
 
@@ -31,10 +32,7 @@ const changeTitle = (newTitle: string) => {
   <button type="button" class="counter" @click="increment">
     增加 是 {{ data }}
   </button>
-  <HelloWorld :msg="title" 
-  user="Codex" 
-  @alert-parent="handleChildAlert"
-  @change-title="changeTitle" />
+  <HelloWorld :msg="title" user="Codex" @alert-parent="handleChildAlert" @change-title="changeTitle" />
 
   <h3>展示传来的数据 + {{ parentData }}</h3>
 </template>
