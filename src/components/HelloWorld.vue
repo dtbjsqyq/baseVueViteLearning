@@ -1,8 +1,19 @@
+<!-- src\components\HelloWorld.vue -->
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import viteLogo from '../assets/vite.svg'
 import heroImg from '../assets/hero.png'
 import vueLogo from '../assets/vue.svg'
+
+import {
+  activeAlarms,
+  filterCriticalAlarms,
+} from '../ts/demo6'
+
+const criticalAlarms = computed(()=>{
+  return filterCriticalAlarms(activeAlarms.value)
+})
+
 
 const count = ref(0)
 const status = ref('normal')  // normal / warning / error
@@ -81,13 +92,31 @@ const triggerError = () => {
 
     <h6>加工值: {{ doubleCount }}</h6>
     <h6>加工值: {{ doubleCount }}</h6>
-    <h6>加工值: {{ doubleCount }}</h6>
-    <h6>加工值: {{ doubleCount }}</h6>
+
 
     <p>设备状态: {{ status }}</p>
+
+
+
+
     <button type="button" class="counter" @click="triggerError">
       触发错误
     </button>
+
+    <h3>全部报警信息</h3>
+    <ul>
+      <li v-for="log in activeAlarms" :key="log.logId">
+        [{{ log.logId }}] {{ log.sensorName }} - {{ log.message || '无报警信息' }} - {{ log.timestamp }}
+      </li>
+    </ul>
+
+
+    <h3>过滤后的严重报警</h3>
+    <ul>
+      <li v-for="log in criticalAlarms" :key="log.logId">
+        [{{ log.logId }}] {{ log.sensorName }} - {{ log.message || '无报警信息' }} - {{ log.timestamp }}
+      </li>
+    </ul>
 
 
   </section>

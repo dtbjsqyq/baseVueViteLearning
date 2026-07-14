@@ -1,5 +1,6 @@
+<!-- src\App.vue -->
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 import HelloWorld from './components/HelloWorld.vue'
 const data = ref(0)
