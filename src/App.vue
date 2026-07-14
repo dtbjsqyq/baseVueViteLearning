@@ -3,6 +3,7 @@
 import { ref } from 'vue'
 
 import HelloWorld from './components/HelloWorld.vue'
+import Demo8 from './components/demo8.vue'
 const data = ref(0)
 const parentData = ref("a")
 
@@ -36,4 +37,6 @@ const changeTitle = (newTitle: string) => {
   <HelloWorld :msg="title" user="Codex" @alert-parent="handleChildAlert" @change-title="changeTitle" />
 
   <h3>展示传来的数据 + {{ parentData }}</h3>
+
+  <demo8 />
 </template>

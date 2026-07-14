@@ -10,7 +10,13 @@ import {
   filterCriticalAlarms,
 } from '../ts/demo6'
 
-const criticalAlarms = computed(()=>{
+
+import {
+  plcConfig,
+} from '../ts/demo7'
+import type { PlcConfig } from '../ts/demo7'
+
+const criticalAlarms = computed(() => {
   return filterCriticalAlarms(activeAlarms.value)
 })
 
@@ -117,6 +123,10 @@ const triggerError = () => {
         [{{ log.logId }}] {{ log.sensorName }} - {{ log.message || '无报警信息' }} - {{ log.timestamp }}
       </li>
     </ul>
+
+
+
+    
 
 
   </section>
